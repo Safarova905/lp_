@@ -1,0 +1,708 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <!-- We use a custom world for the iiwa so that the camera angle is launched correctly. -->
+  <!-- One can change this world to his needs or use another one. -->
+  
+  <world name="default">
+    
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    
+    <!-- Global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Disable simulation shadows -->
+    <scene>
+      <ambient>0.0 0.0 0.0 1.0</ambient>
+      <shadows>0</shadows>
+    </scene>
+
+    <!-- Human Body model -->
+    <model name='human_body'>
+      <static>1</static>
+      <!--pose frame=''>0.55 0.15 1.0 -1.483 0 0</pose-->
+      <pose frame=''>0.55 0.04 0.94 -1.57 0 0</pose>
+
+      <!-- Skin Link -->
+      <link name='skin_link'>
+        <inertial>
+          <mass>30</mass>
+          <inertia>
+            <ixx>0.05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.05</iyy>
+            <iyz>0</iyz>
+            <izz>0.05</izz>
+          </inertia>
+        </inertial>
+        <collision name='skin_link_collision'>
+          <geometry>
+            <mesh>
+              <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/torso/meshes/abdomen.stl</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <!-- <surface>
+            <soft_contact>
+              <dart>
+                <bone_attachment>1000.0</bone_attachment>
+                <stiffness>500.0</stiffness>
+                <damping>50.0</damping>
+                <flesh_mass_fraction>0.3</flesh_mass_fraction>
+              </dart>
+            </soft_contact>
+          </surface> -->
+        </collision>
+        <visual name='skin_link_visual'>
+          <geometry>
+            <mesh>
+              <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/torso/meshes/abdomen.stl</uri>
+              <scale>0.01 0.01 0.01</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>1.0 0.804 0.58 1.0</ambient>
+            <diffuse>1.0 0.804 0.58 1.0</diffuse>
+            <specular>1.0 0.804 0.58 1.0</specular>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <gravity>1</gravity>
+      </link>
+
+    
+ <!-- Adipose_tissue Link -->
+    <link name='adipose_tissue_link'>
+    <pose frame=''>0 -0.008 0 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='adipose_tissue_link_collision'>
+        <geometry>
+          <box>
+            <size>0.25 0.07 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='adipose_tissue_link_visual'>
+        <geometry>
+         <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/fat_link/meshes/adipoxe_tissue_new.dae</uri>
+            <scale>0.135 0.05 0.13</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+ <!-- Connective_tissue Link -->
+    <link name='connective_tissue_link'>
+    <pose frame=''>0 0.001 0 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='connective_tissue_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='connective_tissue_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/connective_tissue1/meshes/connective_tissue.dae</uri>
+            <scale>0.13 0.08 0.13</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+   
+
+    <!-- Muscle Link -->
+    <link name='muscle_link'>
+    <pose frame=''>0 0.017 0 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='muscle_link_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='muscle_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/muscle_link/meshes/muscle_link.dae</uri>
+            <scale>0.13 0.08 0.13</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+ <!-- Connective_tissue Link -->
+    <link name='connective_tissue_link'>
+    <pose frame=''>0 0.03 0 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='connective_tissue_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='connective_tissue_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/connective_tissue2/meshes/connective_tissue2.dae</uri>
+            <scale>0.13 0.08 0.13</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+ <!-- Peritoneum Link -->
+    <link name='peritoneum_link'>
+    <pose frame=''>0 0.03 0 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='peritoneum_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='peritoneum_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/peritoneum/meshes/peritoneum.dae</uri>
+            <scale>0.13 0.08 0.13</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+
+    <!-- Intestine Link -->
+    <link name='intestine_link'>
+    <pose frame=''>-0.00271 0.024 -0.06 0 0 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='intestine_link_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='intestine_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/intestine_link/meshes/intestine_link.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+  <!-- Appendix Link -->
+    <link name='appendix_link'>
+    <pose frame=''>-0.027 0 -0.111 -1.450001 0.299999 0.399999</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='appendix_link_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='appendix_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/appendix/meshes/appendix.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+ <!-- Spleen Link -->
+    <link name='spleen_link'>
+    <pose frame=''>0.153 0.031 0.16 -3.200001 0.299999 3.099999</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='spleen_link_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='spleen_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_projec1t/selezenka/meshes/selesenka_new.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+<!-- Stomach Link -->
+    <link name='stomach_link'>
+    <pose frame=''>0.069 0.005 0.0606 1.591593 0.341594 -3.091594</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='stomach_link_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='stomach_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/stomach/meshes/stomach.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+<!-- Liver Link -->
+    <link name='liver_link'>
+    <pose frame=''>-0.073 0.02 0.090800 -1.550001 0.049999 0</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='liver_link_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='liver_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/liver/meshes/liver.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+<!-- Gall_bladder Link -->
+    <link name='gall_bladder_link'>
+    <pose frame=''>-0.052710 0.038 0.1068 -0.00841 0.041593 -3.141592</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='gall_bladder_link_collision'>
+        <geometry>
+          <box>
+            <size>0.20 0.02 0.25</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='gall_bladder_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/gall_bladder/meshes/gall_bladder.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+<!-- Pancreas Link -->
+    <link name='pancreas_link'>
+    <pose frame=''>-0.01271 0.037 0.0338 1.563183 1.95 3.141592</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='pancreas_link_collision'>
+        <geometry>
+          <box>
+            <size>0.01571 0.075 0.1068</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='pancreas_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/pancreas/meshes/zheleza.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+<!-- Kidneys Link -->
+    <link name='kidneys_link'>
+    <pose frame=''>-0.00271 0.028 -0.03 1.513184 1.650001 -3.141592</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='kidneys_link_collision'>
+        <geometry>
+          <box>
+            <size>0.01571 0.075 0.1068</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='kidneys_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/kidneys/meshes/kidneys.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+<!-- Aperture Link -->
+    <link name='aperture_link'>
+    <pose frame=''>-0.00271 0.004 0.12 -1.628414 1.491592 -0.000003</pose>
+      <inertial>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.075</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.075</iyy>
+          <iyz>0</iyz>
+          <izz>0.075</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name='aperture_link_collision'>
+        <geometry>
+          <box>
+            <size>0.01571 0.075 0.1068</size>
+          </box>
+        </geometry>
+        <!-- <surface>
+          <soft_contact>
+            <dart>
+              <bone_attachment>10000.0</bone_attachment>
+              <stiffness>100.0</stiffness>
+              <damping>50.0</damping>
+              <flesh_mass_fraction>0.15</flesh_mass_fraction>
+            </dart>
+          </soft_contact>
+        </surface> -->
+      </collision>
+      <visual name='aperture_link_visual'>
+        <geometry>
+          <mesh>
+            <uri>/home/liaisan/catkin_ws/src/by_passing/worlds/abdomen_project1/aperture/meshes/aperture.dae</uri>
+            <scale>0.065 0.095 0.065</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <gravity>1</gravity>
+    </link>
+
+
+   </model>
+    
+  </world>
+  
+</sdf>
+   

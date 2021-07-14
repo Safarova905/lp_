@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+<node pkg="by_passing" name="hide" output="screen"/>
+</launch>
